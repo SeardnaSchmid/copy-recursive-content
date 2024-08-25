@@ -1,112 +1,131 @@
-import { Notice, Plugin, TAbstractFile, TFile, TFolder } from "obsidian";
+import { Notice, Plugin, TAbstractFile, TFile, TFolder, Menu } from "obsidian";
 
 // Enum to distinguish between file and folder types
-enum ItemType {
+export enum ItemType {
     File = 'file',
     Folder = 'folder'
 }
 
-// Base interface for both file and folder items
-interface BaseItem {
+// Interface for file system items (both files and folders)
+export interface FileSystemItem {
     type: ItemType;
     path: string;
+    content?: string;
 }
-
-// Interface for file items, extending BaseItem
-interface FileItem extends BaseItem {
-    type: ItemType.File;
-    content: string;
-}
-
-// Interface for folder items, extending BaseItem
-interface FolderItem extends BaseItem {
-    type: ItemType.Folder;
-    children: FileSystemItem[];
-}
-
-// Union type for either a file or folder item
-type FileSystemItem = FileItem | FolderItem;
 
 // Interface for the final copy information structure
-interface CopyInfo {
-    rootElement: FileSystemItem;
+export interface CopyInfo {
+    items: FileSystemItem[];
     timestamp: string;
 }
 
 export default class RecursiveItemCopyPlugin extends Plugin {
     async onload() {
-        // Register a new item in the file menu
+        // Register a new item in the file menu for individual files/folders
         this.registerEvent(
-            this.app.workspace.on("file-menu", (menu, file) => {
+            this.app.workspace.on("file-menu", (menu: Menu, file: TAbstractFile) => {
                 menu.addItem((item) => {
                     item
-                        .setTitle("Copy Contents")
+                        .setTitle("Copy Contents (Recursive)")
                         .setIcon("copy")
                         .onClick(async () => {
-                            await this.copyContents(file);
+                            await this.handleCopyContents([file]);
+                        });
+                });
+            })
+        );
+
+        // Register a new item in the file explorer context menu for multiple selections
+        this.registerEvent(
+            this.app.workspace.on("files-menu", (menu: Menu, files: TAbstractFile[]) => {
+                menu.addItem((item) => {
+                    item
+                        .setTitle("Copy Contents of Selected Items (Recursive)")
+                        .setIcon("copy")
+                        .onClick(async () => {
+                            await this.handleCopyContents(files);
                         });
                 });
             })
         );
     }
 
-    // Main method to copy contents of a file or folder
-    async copyContents(file: TAbstractFile) {
-        let rootFolder: FileSystemItem;
-
-        if (file instanceof TFolder) {
-            // If it's a folder, get its contents recursively
-            rootFolder = await this.getFolderContents(file);
-        } else if (file instanceof TFile) {
-            // If it's a file, read its content
-            const content = await this.app.vault.read(file);
-            rootFolder = {
-                type: ItemType.File,
-                path: file.path,
-                content: content
-            };
-        } else {
-            // If it's neither a file nor a folder, show an error
-            new Notice("Unable to copy. Selected item is neither a file nor a folder.");
+    // Updated method to handle copying contents of selected files or folders
+    async handleCopyContents(files: TAbstractFile[]) {
+        if (files.length === 0) {
+            new Notice("No files or folders selected.");
             return;
         }
 
+        const items: FileSystemItem[] = [];
+
+        for (const file of files) {
+            if (file instanceof TFolder) {
+                // If it's a folder, get its contents recursively
+                items.push(...await this.getFolderContents(file));
+            } else if (file instanceof TFile) {
+                // If it's a file, read its content
+                const content = await this.app.vault.read(file);
+                items.push({
+                    type: ItemType.File,
+                    path: file.path,
+                    content: content
+                });
+            }
+        }
+
+        // Remove duplicates
+        const uniqueItems = this.removeDuplicates(items);
+
         // Create the final copy info structure
         const copyInfo: CopyInfo = {
-            rootElement: rootFolder,
+            items: uniqueItems,
             timestamp: new Date().toISOString()
         };
 
         // Copy the stringified JSON to clipboard
         await navigator.clipboard.writeText(JSON.stringify(copyInfo, null, 2));
-        new Notice("Contents copied to clipboard in JSON format!");
+        new Notice(`Contents of ${uniqueItems.length} unique item(s) copied to clipboard in JSON format!`);
     }
 
-    // Recursive method to get contents of a folder
-    async getFolderContents(folder: TFolder): Promise<FileSystemItem> {
-        const folderItem: FileSystemItem = {
+    // Updated method to get contents of a folder
+    async getFolderContents(folder: TFolder): Promise<FileSystemItem[]> {
+        const items: FileSystemItem[] = [{
             type: ItemType.Folder,
-            path: folder.path,
-            children: []
-        };
+            path: folder.path
+        }];
 
         // Iterate through all children of the folder
         for (const child of folder.children) {
             if (child instanceof TFile) {
                 // If child is a file, read its content
                 const content = await this.app.vault.read(child);
-                folderItem.children!.push({
+                items.push({
                     type: ItemType.File,
                     path: child.path,
                     content: content
                 });
             } else if (child instanceof TFolder) {
                 // If child is a folder, recursively get its contents
-                const subFolderItem = await this.getFolderContents(child);
-                folderItem.children!.push(subFolderItem);
+                items.push(...await this.getFolderContents(child));
             }
         }
 
-        return folderItem;
+        return items;
+    }
+
+    // Updated method to remove duplicates
+    removeDuplicates(items: FileSystemItem[]): FileSystemItem[] {
+        const uniqueItems: FileSystemItem[] = [];
+        const seenPaths = new Set<string>();
+
+        for (const item of items) {
+            if (!seenPaths.has(item.path)) {
+                seenPaths.add(item.path);
+                uniqueItems.push(item);
+            }
+        }
+
+        return uniqueItems;
     }
 }
