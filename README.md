@@ -9,6 +9,8 @@ The Streamlined Folder Copy plugin for Obsidian enhances your note-taking and or
 - Analyzing the structure and content of your notes
 - Migrating content to other systems or applications
 
+![](/assets/preview.png)
+
 ## Features
 
 - Copy the contents of a single file or an entire folder structure
