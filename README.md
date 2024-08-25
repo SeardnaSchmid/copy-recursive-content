@@ -9,6 +9,9 @@ The Recursive Item Copy plugin for Obsidian enhances your note-taking and organi
 - Analyzing the structure and content of your notes
 - Migrating content to other systems or applications
 
+
+![](/assets/preview.png)
+
 ## Features
 
 - Copy the contents of a single file, multiple files, or entire folder structures
