@@ -1,0 +1,11 @@
+{
+    "id": "copy-folder-content",
+    "name": "Copy Folder Content",
+    "version": "1.0.0",
+    "minAppVersion": "0.9.12",
+    "description": "A plugin to copy content from one folder to another.",
+    "author": "SchmidA",
+    "authorUrl": "https://your-website.com",
+    "isDesktopOnly": true
+  }
+  
