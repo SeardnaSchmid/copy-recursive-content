@@ -51,31 +51,24 @@ Example output for a folder:
 
 ```json
 {
-  "rootElement": {
-    "type": "folder",
-    "path": "/Example Folder",
-    "children": [
-      {
-        "type": "file",
-        "path": "/Example Folder/Note1.md",
-        "content": "This is the content of Note1."
-      },
-      {
-        "type": "folder",
-        "path": "/Example Folder/Subfolder",
-        "children": [
-          {
-            "type": "file",
-            "path": "/Example Folder/Subfolder/Note2.md",
-            "content": "This is the content of Note2."
-          }
-        ]
-      }
-    ]
-  },
-  "timestamp": "2023-08-01T12:34:56.789Z"
-}
-```
+  "items": [
+    {
+      "type": "folder",
+      "path": "Essen"
+    },
+    {
+      "type": "file",
+      "path": "Essen/Milchreis Rezept.md",
+      "content": "\n# Der perfekte Milchreis - Grundrezept\n\n## Zutaten (für 4 Portionen):\n\n- 1 Liter Vollmilch, zimmerwarm\n- 250 g Milchreis\n- 4 EL Zucker\n- 1 EL Butter\n- 1 Vanilleschote oder 1 Pck. Vanillezucker\n- Nach Belieben: Zimtzucker, Apfelmus, Rote Grütze oder frische Früchte\n\n## Zubereitung:\n\n1. In einem großen Topf die Butter schmelzen und den Rundkornreis kurz darin anschwitzen.\n\n2. Zimmerwarme Vollmilch und 4 EL Zucker hinzugeben. Wenn vorhanden, das Mark einer Vanilleschote sowie die aufgeschlitzte Schote ebenfalls in den Topf geben; andernfalls Vanillezucker hinzufügen.\n\n3. Alles unter vorsichtigem Rühren mit dem Holzkochlöffel einmal aufkochen lassen. Dabei aufpassen, dass sich nichts am Topfboden ansetzt.\n\n4. Die Temperatur der Herdplatte zurückschalten - die Milch sollte noch leicht weiterköcheln. Den Milchreis im geschlossenen Topf circa 30 Minuten ziehen lassen.\n\n5. Nach ca. 15 Minuten (evtl. auch früher) umrühren.\n\n6. Nach 30 Minuten ist der Reis servierfertig. Er kann warm oder kalt gegessen werden.\n\n7. Nach Geschmack Zimt und Zucker mischen und über den Milchreis geben oder Apfelmus, Rote Grütze, frisches Obst, etc. dazu reichen.\n\n## Nährwerte und Zubereitungsinfo:\n\n- Kalorien pro Portion: ca. 385 Kcal\n- Arbeitszeit: ca. 10 Minuten\n- Koch-/Backzeit: ca. 35 Minuten\n- Gesamtzeit: ca. 45 Minuten\n- Schwierigkeitsgrad: normal\n"
+    },
+    {
+      "type": "file",
+      "path": "Essen/Rhabarber Kuchen Rezept.md",
+      "content": "### Zutaten\n\n#### Für die Streusel\n\n- 125 Gramm Butter kalt in Stückchen\n- 125 Gramm Weizenmehl\n- 80 Gramm gemahlene Mandeln Amaretti-Variante siehe Tipps\n- 70 Gramm Zucker\n\n#### Zum Belegen\n\n- 700 Gramm Rhabarber\n\n#### Für den Teig\n\n- 250 Gramm Butter weich\n- 180 Gramm Zucker\n- 4 mittelgroße Eier\n- 400 Gramm Weizenmehl\n- 3 Teelöffel Backpulver\n- 1 Prise Salz\n- 140 Milliliter Milch grobe Angabe\n\n### Zubereitung\n\n- Zunächst die Streusel vorbereiten. Dafür die fein gehackte kalte Butter mit den anderen Zutaten kurz mit den Händen verkneten und zu Streuseln formen. In den Kühlschrank stellen.\n    \n- Die Rhabarberstangen putzen, waschen, schälen und grob in 1-2 cm große Stückchen schneiden. Ein Backblech (max. 37*42 cm) mit Backpapier auslegen oder fetten und mit Mehl bestäuben. Ofen auf 175 Grad Ober- und Unterhitze vorheizen.\n    \n- Für den Rührteig die weiche Butter mit dem Zucker schaumig schlagen. Eier nach und nach einzeln unterrühren. Zuletzt das mit dem Backpulver und Salz vermischte Mehl im Wechsel mit der Milch unterrühren. Der Teig soll schwer reißend vom Löffel fallen.\n    \n- Teig auf dem Backblech verteilen, glattstreichen, die Rhabarberstücke leicht hineindrücken und zuletzt die Streusel auf dem Kuchen verteilen. Etwa 35-40 Minuten backen.\n    \n\n### Anmerkungen\n\n- **Variante mit Amarett**i: Besonders köstlich wird der Rhabarberkuchen mit Amarettini-Streuseln statt normalen Mandelstreuseln. Dafür die gemahlenen Mandeln und den Zucker durch 80 Gramm weiche Amaretti, grob zerbröckelt, sowie 30 g Vanillezucker ersetzen"
+    }
+  ],
+  "timestamp": "2024-08-24T19:41:50.729Z"
+}```
 
 ## Use Cases
 
