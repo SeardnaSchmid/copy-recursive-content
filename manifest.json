@@ -1,0 +1,10 @@
+{
+	"id": "copy-recursive-content-obsidian-plugin",
+	"name": "Structured Copy: Files & Folders",
+	"version": "1.0.8",
+	"minAppVersion": "0.15.0",
+	"description": "Easily copy the contents of files and folders in a structured JSON format.",
+	"author": "SchmidA",
+	"authorUrl": "https://github.com/SeardnaSchmid",
+	"isDesktopOnly": false
+}

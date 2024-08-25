@@ -1,0 +1,25 @@
+{
+	"name": "copy-recursive-content",
+	"version": "1.0.8",
+	"description": "Easily copy the contents of files and folders in a structured JSON format.",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"version": "node version-bump.mjs && git add manifest.json versions.json"
+	},
+	"keywords": [],
+	"author": "schmida",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/jest": "^29.5.12",
+		"@types/node": "^22.0.2",
+		"@typescript-eslint/eslint-plugin": "8.0.0",
+		"@typescript-eslint/parser": "8.0.0",
+		"builtin-modules": "4.0.0",
+		"esbuild": "^0.23.0",
+		"obsidian": "^1.6.6",
+		"tslib": "2.4.0",
+		"typescript": "5.5.4"
+	}
+}
