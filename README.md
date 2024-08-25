@@ -1,96 +1,89 @@
-# Obsidian Sample Plugin
+# Streamlined Folder Copy Plugin for Obsidian
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+## Purpose
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+The Streamlined Folder Copy plugin for Obsidian enhances your note-taking and organization experience by allowing you to easily copy the contents of files and folders in a structured JSON format. This plugin is particularly useful for:
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+- Backing up specific parts of your vault
+- Sharing structured content with others
+- Analyzing the structure and content of your notes
+- Migrating content to other systems or applications
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+## Features
 
-## First time developing plugins?
+- Copy the contents of a single file or an entire folder structure
+- Preserve the hierarchical structure of folders and files
+- Include file contents in the copied data
+- Output data in a clean, structured JSON format
+- Timestamp each copy operation for easy tracking
 
-Quick starting guide for new plugin devs:
+## How to Use
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+1. **Installation**
+   - Open Obsidian Settings
+   - Go to "Community Plugins" and disable Safe Mode
+   - Click "Browse" and search for "Streamlined Folder Copy"
+   - Install the plugin and enable it
 
-## Releasing new releases
+2. **Copying File or Folder Contents**
+   - Right-click on any file or folder in your Obsidian vault
+   - In the context menu, click on "Copy Contents"
+   - The plugin will process the selected item and copy the structured data to your clipboard
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+3. **Using the Copied Data**
+   - Paste the copied content into any text editor or application that accepts JSON
+   - The copied data will include the full path of each item, its content (for files), and maintain the folder structure (for folders)
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+## Output Format
 
-## Adding your plugin to the community plugin list
+The copied data is in JSON format and includes:
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+- `rootElement`: The copied file or folder
+  - `type`: Either "file" or "folder"
+  - `path`: The full path of the item in your vault
+  - `content`: The content of the file (for file types)
+  - `children`: An array of contained files and folders (for folder types)
+- `timestamp`: The date and time when the copy was made
 
-## How to use
-
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+Example output for a folder:
 
 ```json
 {
-    "fundingUrl": "https://buymeacoffee.com"
+  "rootElement": {
+    "type": "folder",
+    "path": "/Example Folder",
+    "children": [
+      {
+        "type": "file",
+        "path": "/Example Folder/Note1.md",
+        "content": "This is the content of Note1."
+      },
+      {
+        "type": "folder",
+        "path": "/Example Folder/Subfolder",
+        "children": [
+          {
+            "type": "file",
+            "path": "/Example Folder/Subfolder/Note2.md",
+            "content": "This is the content of Note2."
+          }
+        ]
+      }
+    ]
+  },
+  "timestamp": "2023-08-01T12:34:56.789Z"
 }
 ```
 
-If you have multiple URLs, you can also do:
+## Use Cases
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+1. **Backup**: Quickly create a structured backup of specific parts of your vault.
+2. **Sharing**: Share a structured representation of your notes, including content and organization.
+3. **Analysis**: Use the JSON output to analyze the structure and content of your notes programmatically.
+4. **Migration**: Use the structured output to migrate your notes to other systems or applications.
 
-## API Documentation
+## Feedback and Support
 
-See https://github.com/obsidianmd/obsidian-api
+If you encounter any issues or have suggestions for improvements, please visit our GitHub repository [insert link here] to submit an issue or contribute to the project.
+
+Enjoy streamlined copying of your Obsidian content!

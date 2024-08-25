@@ -1,9 +1,9 @@
 {
-	"id": "copy-content-obsidian-plugin",
-	"name": "copy-content-obsidian-plugin",
+	"id": "copy-recursive-content-obsidian-plugin",
+	"name": "copy-recursive-content-obsidian-plugin",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Copies content of a selected file or folder content.",
+	"description": "Copies content of a selected file or folder (recursive) content.",
 	"author": "Obsidian",
 	"authorUrl": "https://obsidian.md",
 	"fundingUrl": "https://obsidian.md/pricing",
