@@ -1,6 +1,6 @@
 {
 	"name": "copy-recursive-content-obsidian-plugin",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Easily copy the contents of files and folders in a structured JSON format.",
 	"main": "main.js",
 	"scripts": {
