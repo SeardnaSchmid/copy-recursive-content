@@ -3,9 +3,8 @@
 	"name": "copy-recursive-content-obsidian-plugin",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Copies content of a selected file or folder (recursive) content.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Easily copy the contents of files and folders in a structured JSON format.",
+	"author": "SchmidA",
+	"authorUrl": "https://github.com/SeardnaSchmid",
 	"isDesktopOnly": false
 }

@@ -33,7 +33,7 @@ interface CopyInfo {
     timestamp: string;
 }
 
-export default class StreamlinedFolderCopyPlugin extends Plugin {
+export default class RecursiveItemCopyPlugin extends Plugin {
     async onload() {
         // Register a new item in the file menu
         this.registerEvent(
