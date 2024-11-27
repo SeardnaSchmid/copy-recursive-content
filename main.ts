@@ -26,7 +26,7 @@ export default class RecursiveItemCopyPlugin extends Plugin {
             this.app.workspace.on("file-menu", (menu: Menu, file: TAbstractFile) => {
                 menu.addItem((item) => {
                     item
-                        .setTitle("Copy Contents (Recursive)")
+                        .setTitle("Copy contents (recursive)")
                         .setIcon("copy")
                         .onClick(async () => {
                             await this.handleCopyContents([file]);
@@ -40,7 +40,7 @@ export default class RecursiveItemCopyPlugin extends Plugin {
             this.app.workspace.on("files-menu", (menu: Menu, files: TAbstractFile[]) => {
                 menu.addItem((item) => {
                     item
-                        .setTitle("Copy Contents of Selected Items (Recursive)")
+                        .setTitle("Copy contents of selected items (recursive)")
                         .setIcon("copy")
                         .onClick(async () => {
                             await this.handleCopyContents(files);
