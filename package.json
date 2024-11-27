@@ -1,6 +1,6 @@
 {
 	"name": "copy-recursive-content",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "Easily copy the contents of files and folders in a structured JSON format.",
 	"main": "main.js",
 	"scripts": {
